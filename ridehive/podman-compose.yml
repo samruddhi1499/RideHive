@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ridehive_app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - ridehive_db
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=ridehive_db
+      - DB_PORT=3306
+      - DB_DATABASE=ridehive_database
+      - DB_USERNAME=ridehive_user
+      - DB_PASSWORD=ridehive_password
+    volumes:
+      - .:/var/www
+    command: sh -c "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000"
+
+  ridehive_db:
+    image: docker.io/mysql:8.0
+    container_name: ridehive_mysql_db
+    environment:
+      MYSQL_DATABASE: ridehive_database
+      MYSQL_USER: ridehive_user
+      MYSQL_PASSWORD: ridehive_password
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
