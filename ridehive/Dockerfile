@@ -1,10 +1,9 @@
-# Use the official PHP 8.2 image with FPM and necessary extensions
-FROM php:8.2-fpm
+# Stage 1: Build Stage
+FROM php:8.2-fpm AS build
 
-# Set the working directory
 WORKDIR /var/www
 
-# Install system dependencies, MySQL PDO extension, and Node.js 20.x
+# Install system dependencies and PHP extensions
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -13,7 +12,8 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     default-mysql-client \
-    && docker-php-ext-install pdo_mysql \
+    libzip-dev \
+    && docker-php-ext-install pdo_mysql bcmath mbstring \
     && apt-get clean
 
 # Install Composer
@@ -26,25 +26,29 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
 # Copy application files to the container
 COPY . .
 
-# Set the correct permissions for Laravel storage and cache directories
-RUN chown -R www-data:www-data /var/www \
-    && chmod -R 755 /var/www/storage /var/www/bootstrap/cache
-
-# Install PHP dependencies, including Laravel Breeze
+# Install PHP dependencies (Composer)
 RUN composer install --no-dev --optimize-autoloader
-
-# Install Laravel Breeze for authentication scaffolding
-RUN composer require laravel/breeze --dev && \
-    php artisan breeze:install blade
 
 # Install Node.js dependencies
 RUN npm install
 
-# Adjust permissions for node_modules to allow execution of Vite
-RUN chmod -R 755 node_modules
-
 # Compile assets using Vite
 RUN npm run build
+
+# Stage 2: Production Stage
+FROM php:8.2-fpm
+
+WORKDIR /var/www
+
+# Copy over the application from the build stage
+COPY --from=build /var/www /var/www
+
+# Set the correct permissions for Laravel storage and cache directories
+RUN chown -R www-data:www-data /var/www \
+    && chmod -R 755 /var/www/storage /var/www/bootstrap/cache
+
+# Set permissions for node_modules to allow execution of Vite
+RUN chmod -R 755 node_modules
 
 # Clear and cache configurations, routes, and views for better performance
 RUN php artisan config:clear && php artisan config:cache
@@ -54,8 +58,8 @@ RUN php artisan view:clear && php artisan view:cache
 # Ensure the Laravel storage and cache directories are writable
 RUN chmod -R 775 storage bootstrap/cache
 
-# Serve the application on 0.0.0.0 to make it accessible from outside the container
-CMD php artisan serve --host=0.0.0.0 --port=8000
-
 # Expose port 8000
 EXPOSE 8000
+
+# Start the application
+CMD php artisan serve --host=0.0.0.0 --port=8000
