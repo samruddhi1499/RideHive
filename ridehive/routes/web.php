@@ -3,10 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
+// Display the Welcome Page
 Route::get('/', function () {
     return view('welcome');
 });
-
 
 // Display Login Page
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -19,4 +19,3 @@ Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('r
 
 // Handle Register Form Submission
 Route::post('register', [AuthController::class, 'register']);
-
