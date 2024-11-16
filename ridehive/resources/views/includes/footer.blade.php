@@ -1,9 +1,5 @@
 
-<footer class="bg-gray-100 text-black py-8 mt-4 rounded-t-lg">
-
-
-
-
+<footer class="bg-gray-100 text-black py-8 mt-4 rounded-t-3xl">
 
     <div class="container mx-auto text-center">
 
@@ -13,7 +9,7 @@
                 RideHive
             </a>
             <p class="text-sm text-gray-800">
-                Your trusted partner for carpooling and ride-sharing.
+                Your trusted partner for renting bikes and scooters.
             </p>
         </div>
 

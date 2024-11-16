@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RidePaymentController;
 
 // Display the Welcome Page
 Route::get('/', function () {
+    
     return view('welcome');
 });
 
@@ -19,3 +21,15 @@ Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('r
 
 // Handle Register Form Submission
 Route::post('register', [AuthController::class, 'register']);
+
+// Step 1 - Ride Info Form
+Route::get('ride-info', [RidePaymentController::class, 'showRideInfoForm'])->name('rideInfo');
+//Route::get('ride-info', [RidePaymentController::class, 'showRideInfoForm'])->name('rideInfo');
+
+// Step 2 - Payment Details Form
+Route::get('payment-info', [RidePaymentController::class, 'showPaymentForm'])->name('paymentInfo');
+//Route::get('payment-info', [RidePaymentController::class, 'showPaymentForm'])->name('paymentInfo');
+
+// Step 3 - Confirmation and Payment
+Route::get('paymentConfirmation', [RidePaymentController::class, 'submitRide'])->name('paymentConfirmation');
+//Route::post('paymentConfirmation', [RidePaymentController::class, 'submitRide'])->name('paymentConfirmation');

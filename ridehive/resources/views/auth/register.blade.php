@@ -3,7 +3,7 @@
 @section('title', 'Register')
 
 @section('content')
-    <div class=" mt-8 max-w-md mx-auto bg-white p-6 rounded shadow-md">
+    <div class=" mt-8 mb-14 max-w-md mx-auto bg-white p-6 rounded shadow-md">
         <h2 class="text-2xl text-[#e75480] text-center font-semibold mb-6">Register</h2>
         <form action="{{ route('register') }}" method="POST">
             @csrf
@@ -19,7 +19,8 @@
                 <label for="password" class="block mb-1 text-gray-600">Password</label>
                 <input type="password" name="password" id="password" required class="w-full px-3 py-2 border rounded focus:ring">
             </div>
-            <button type="submit" class="w-full bg-[#e75480] text-white py-2 rounded hover:bg-gray-700">Register</button>
+            <button type="submit" class="w-full mb-6 bg-[#e75480] text-white py-2 rounded hover:bg-gray-700">Register</button>
+            <a href="{{ route('login') }}" class=" ml-24 text-black  hover:text-[#e75480]">Already a User...Login Now!!</a>
         </form>
     </div>
 @endsection

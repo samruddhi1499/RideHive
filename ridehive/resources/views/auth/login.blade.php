@@ -15,7 +15,8 @@
                 <label for="password" class="block mb-1 text-gray-600">Password</label>
                 <input type="password" name="password" id="password" required class="w-full px-3 py-2 border rounded focus:ring">
             </div>
-            <button type="submit" class="w-full bg-[#e75480] text-white py-2 rounded hover:bg-gray-700">Login</button>
+            <button type="submit" class="w-full bg-[#e75480] mb-6 text-white py-2 rounded hover:bg-gray-700">Login</button>
+            <a href="{{ route('register') }}" class=" ml-28 text-black  hover:text-[#e75480]">New here...Register Now!!</a>
         </form>
     </div>
 @endsection

@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- Hero Section -->
-<div class="mt-10 text-center flex flex-col lg:flex-row items-center justify-between space-y-8 lg:space-y-0">
+<div class="mt-10 mb-6 text-center flex flex-col lg:flex-row items-center justify-between space-y-8 lg:space-y-0">
     <!-- Content Section -->
     <div class=" ml-16 flex-1 text-center lg:text-left">
         <h1 class="text-4xl text-[#e75480] mb-4">Welcome to RideHive</h1>
@@ -26,23 +26,23 @@
 
 
     <!-- Features Section -->
-    <section id="features" class=" m-11 py-14  ">
+    <section id="features" class=" m-11 mt-32 py-14  ">
         <div class="container mx-auto text-center ">
             <h2 class="text-3xl font-semibold text-[#333] mb-12">Our Features</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
                 <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow ease-in-out duration-300">
                     <img src="{{ asset('rent.jpg') }}" alt="Easy Carpooling" class="w-full h-64 rounded-t-lg">
-                    <h3 class="text-xl font-semibold mt-4 text-[#333]">Easy Rental</h3>
+                    <h3 class="text-xl font-semibold mt-4 text-[#e75480]">Easy Rental</h3>
                     <p class="mt-2 text-gray-600">Rent a bike or scooter effortlessly.</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow ease-in-out duration-300">
                     <img src="savemoney.jpg" alt="Save Money" class="w-full h-64 rounded-t-lg">
-                    <h3 class="text-xl font-semibold mt-4 text-[#333]">Save Money</h3>
+                    <h3 class="text-xl font-semibold mt-4 text-[#e75480]">Save Money</h3>
                     <p class="mt-2 text-gray-600">Reduce your transportation costs.</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow ease-in-out duration-300">
                     <img src="eco.jpg" alt="Eco-Friendly" class="w-full h-64 rounded-t-lg">
-                    <h3 class="text-xl font-semibold mt-4 text-[#333]">Eco-Friendly</h3>
+                    <h3 class="text-xl font-semibold mt-4 text-[#e75480]">Eco-Friendly</h3>
                     <p class="mt-2 text-gray-600">Help reduce your carbon footprint by riding bikes.</p>
                 </div>
             </div>
@@ -52,7 +52,7 @@
     <!-- Testimonials Section -->
     <section id="testimonials" class=" bg-gray-100">
         <div class="container py-20 m-10 mx-auto text-center">
-            <h2 class="text-3xl font-semibold text-[#333] mb-12">What Our Users Say</h2>
+            <h2 class="text-3xl font-semibold text-[#e75480] mb-12">What Our Users Say</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
                 <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow ease-in-out duration-300">
                     <img src="{{ asset('person1.jpg') }}" alt="User 1" class="w-20 h-20 rounded-full mx-auto mb-4">
