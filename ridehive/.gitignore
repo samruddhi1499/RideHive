@@ -1,0 +1,61 @@
+# Laravel-specific files
+/vendor/
+.env
+/node_modules/
+/public/storage
+/storage/*.key
+/public/hot
+/public/bundle.js
+/public/mix-manifest.json
+/.env
+Homestead.yaml
+Homestead.json
+/.vagrant
+
+# Logs and debug files
+*.log
+*.cache
+*.swp
+*.lock
+*.seed
+*.bak
+
+# IDE-specific files
+.idea/
+.vscode/
+*.swp
+*.iml
+
+# Temporary Files
+.DS_Store
+Thumbs.db
+.env.backup
+.env.local
+*.sqlite
+
+# Tailwind and build files
+resources/css/app.css
+public/css/*
+public/js/*
+
+# Logs and caches
+/storage/logs/*.log
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/framework/views/*
+
+# Laravel Cache, Session, Views
+bootstrap/cache/*
+storage/framework/*
+storage/logs/*
+
+# Composer and npm files
+composer.lock
+npm-debug.log
+yarn-error.log
+.env.*
+
+# Other
+.env
+.env.*

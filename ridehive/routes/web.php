@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RidePaymentController;
+use App\Http\Controllers\DashboardController;
 
 // Display the Welcome Page
 Route::get('/', function () {
@@ -33,3 +34,9 @@ Route::get('payment-info', [RidePaymentController::class, 'showPaymentForm'])->n
 // Step 3 - Confirmation and Payment
 Route::get('paymentConfirmation', [RidePaymentController::class, 'submitRide'])->name('paymentConfirmation');
 //Route::post('paymentConfirmation', [RidePaymentController::class, 'submitRide'])->name('paymentConfirmation');
+
+Route::prefix('dashboard')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/history', [DashboardController::class, 'history'])->name('dashboard.history');
+    Route::get('/reservation', [DashboardController::class, 'reservation'])->name('dashboard.reservation');
+});
