@@ -5,6 +5,11 @@ use Illuminate\Http\Request;
 class RidePaymentController extends Controller
 {
     // Step 1: Show the ride info form
+    public function showAllVehicles()
+    {
+        return view('payment.vehicleList');
+    }
+
     public function showRideInfoForm()
     {
         return view('payment.rideInfo');

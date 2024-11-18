@@ -7,7 +7,7 @@
     <!-- Sidebar -->
     <aside class="w-1/5 bg-[#e75480] p-6 shadow-md border-r border-gray-200 flex flex-col justify-between">
         <nav class="space-y-6 mt-8">
-            <a href="{{ route('rideInfo') }}" class="flex items-center text-white hover:text-gray-200 font-medium">
+            <a href="{{ route('vehicles') }}" class="flex items-center text-white hover:text-gray-200 font-medium">
                 <span class="material-icons">directions_bike</span>
                 <span class="ml-2">Book</span>
             </a>

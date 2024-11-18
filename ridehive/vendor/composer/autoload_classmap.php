@@ -14,6 +14,7 @@ return array(
     'App\\Factories\\ConfigurationResolverFactory' => $vendorDir . '/laravel/pint/app/Factories/ConfigurationResolverFactory.php',
     'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\DashboardController' => $baseDir . '/app/Http/Controllers/DashboardController.php',
     'App\\Http\\Controllers\\RidePaymentController' => $baseDir . '/app/Http/Controllers/RidePaymentController.php',
     'App\\Kernel' => $vendorDir . '/laravel/pint/app/Kernel.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
