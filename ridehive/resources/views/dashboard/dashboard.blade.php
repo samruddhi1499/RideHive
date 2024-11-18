@@ -74,7 +74,7 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="bg-gray-100 p-4 rounded-lg shadow flex items-center space-x-4">
-            <img src="/car1.jpg" alt="Property" class="w-20 h-20 rounded">
+            <img src="/white-cycle.jpg" alt="Property" class="w-20 h-20 rounded">
             <div>
                 <h3 class="text-lg font-semibold text-gray-800">Temple City, Thanjavur</h3>
                 <p class="text-sm text-gray-600">Occupied</p>
@@ -82,7 +82,7 @@
             </div>
         </div>
         <div class="bg-gray-100 p-4 rounded-lg shadow flex items-center space-x-4">
-            <img src="/car2.jpg" alt="Property" class="w-20 h-20 rounded">
+            <img src="/cycle2.jpg" alt="Property" class="w-20 h-20 rounded">
             <div>
                 <h3 class="text-lg font-semibold text-gray-800">Pearl Apartments</h3>
                 <p class="text-sm text-gray-600">For Rent</p>

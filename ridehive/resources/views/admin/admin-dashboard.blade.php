@@ -9,7 +9,6 @@
             <a href="{{ url('/admin/users') }}" class="block text-white hover:bg-white hover:text-[#e75480] p-2 rounded">View Users</a>
             <a href="{{ url('/admin/vendors') }}" class="block text-white hover:bg-white hover:text-[#e75480] p-2 rounded">Vendors</a>
             <a href="{{ url('/admin/vehicles') }}" class="block text-white hover:bg-white hover:text-[#e75480] p-2 rounded">Vehicles</a>
-            <a href="{{ url('/admin/bookings') }}" class="block text-white hover:bg-white hover:text-[#e75480] p-2 rounded">Bookings</a>
             <a href="{{ url('/admin/transactions') }}" class="block text-white hover:bg-white hover:text-[#e75480] p-2 rounded">Transaction History</a>
         </nav>
     </aside>
