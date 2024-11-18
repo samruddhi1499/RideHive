@@ -23,15 +23,18 @@ Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('r
 // Handle Register Form Submission
 Route::post('register', [AuthController::class, 'register']);
 
-// Step 1 - Ride Info Form
+// Step 1 - Vehicle List
+Route::get('vehicles', [RidePaymentController::class, 'showAllVehicles'])->name('vehicles');
+
+// Step 2 - Ride Info Form
 Route::get('ride-info', [RidePaymentController::class, 'showRideInfoForm'])->name('rideInfo');
 //Route::get('ride-info', [RidePaymentController::class, 'showRideInfoForm'])->name('rideInfo');
 
-// Step 2 - Payment Details Form
+// Step 3 - Payment Details Form
 Route::get('payment-info', [RidePaymentController::class, 'showPaymentForm'])->name('paymentInfo');
 //Route::get('payment-info', [RidePaymentController::class, 'showPaymentForm'])->name('paymentInfo');
 
-// Step 3 - Confirmation and Payment
+// Step 4 - Confirmation and Payment
 Route::get('paymentConfirmation', [RidePaymentController::class, 'submitRide'])->name('paymentConfirmation');
 //Route::post('paymentConfirmation', [RidePaymentController::class, 'submitRide'])->name('paymentConfirmation');
 
@@ -65,3 +68,18 @@ Route::prefix('admin')->group(function () {
 
     // Add routes for other admin pages later
 });
+
+Route::prefix('vendor')->group(function () {
+    Route::get('/reservations', function () {
+        return view('vendor-role.reservations');
+    })->name('vendor-role.reservations');
+
+    Route::get('/Booking-History', function () {
+        return view('vendor-role.bookingHistory');
+    })->name('vendor-role.bookingHistory');
+
+    Route::get('/vehicles', function () {
+        return view('vendor-role.vehicles');
+    })->name('vendor-role.vehicles');
+});
+

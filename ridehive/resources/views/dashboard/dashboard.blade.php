@@ -7,7 +7,7 @@
     <!-- Sidebar -->
     <aside class="w-1/5 bg-[#e75480] p-6 shadow-md border-r border-gray-200 flex flex-col justify-between">
         <nav class="space-y-6 mt-8">
-            <a href="{{ route('rideInfo') }}" class="flex items-center text-white hover:text-gray-200 font-medium">
+            <a href="{{ route('vehicles') }}" class="flex items-center text-white hover:text-gray-200 font-medium">
                 <span class="material-icons">directions_bike</span>
                 <span class="ml-2">Book</span>
             </a>
@@ -74,7 +74,7 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="bg-gray-100 p-4 rounded-lg shadow flex items-center space-x-4">
-            <img src="/car1.jpg" alt="Property" class="w-20 h-20 rounded">
+            <img src="/white-cycle.jpg" alt="Property" class="w-20 h-20 rounded">
             <div>
                 <h3 class="text-lg font-semibold text-gray-800">Temple City, Thanjavur</h3>
                 <p class="text-sm text-gray-600">Occupied</p>
@@ -82,7 +82,7 @@
             </div>
         </div>
         <div class="bg-gray-100 p-4 rounded-lg shadow flex items-center space-x-4">
-            <img src="/car2.jpg" alt="Property" class="w-20 h-20 rounded">
+            <img src="/cycle2.jpg" alt="Property" class="w-20 h-20 rounded">
             <div>
                 <h3 class="text-lg font-semibold text-gray-800">Pearl Apartments</h3>
                 <p class="text-sm text-gray-600">For Rent</p>
