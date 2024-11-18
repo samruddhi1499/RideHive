@@ -10,7 +10,7 @@ A platform for users to rent bikes and scooters online. Vendors can list vehicle
 - **Payment Module**: Secure payment processing.
 
 ## Setup and Access the Application
-- Clone the github Link: ``
+- Clone the github Link: `https://github.com/samruddhi1499/RideHive.git`
 - Open Windows Powershell and navigate to project folder 
 - Remove the `.\vendor` using command `Remove-Item -Recurse -Force .\vendo`
 - Run following commands:
