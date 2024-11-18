@@ -5,7 +5,7 @@
         </h1>
          <!-- Navigation -->
          <nav class="space-x-6 text-gray-600">
-            @if(request()->is('dashboard*'))
+            @if(request()->is('dashboard*') || request()->is('admin*'))
                 <!-- Dashboard Header Icons -->
                 <a href="#" class="text-gray-600 hover:text-[#e75480]">
                     <span class="material-icons">notifications</span>

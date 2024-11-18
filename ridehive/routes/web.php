@@ -40,3 +40,28 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/history', [DashboardController::class, 'history'])->name('dashboard.history');
     Route::get('/reservation', [DashboardController::class, 'reservation'])->name('dashboard.reservation');
 });
+
+Route::prefix('admin')->group(function () {
+    Route::get('/users', function () {
+        return view('admin.view-users');
+    })->name('admin.users');
+
+    Route::get('/vendors', function () {
+        return view('admin.vendors');
+    })->name('admin.vendors');
+
+    Route::get('/vehicles', function () {
+        return view('admin.vehicles');
+    })->name('admin.vehicles');
+
+    Route::get('/bookings', function () {
+        return view('admin.bookings');
+    })->name('admin.bookings');
+    
+    Route::get('/transactions', function () {
+        return view('admin.transaction-history');
+    })->name('admin.transactions');
+    
+
+    // Add routes for other admin pages later
+});
