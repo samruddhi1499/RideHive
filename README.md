@@ -23,6 +23,32 @@ A platform for users to rent bikes and scooters online. Vendors can list vehicle
     - `php artisan serve`
 - Navigate to `localhost:8000/`
 
+## Access Links:
+
+- Public Views: 
+    http://localhost:8000/
+    http://localhost:8000/login
+    http://localhost:8000/register
+
+- User Views:
+    http://localhost:8000/dashboard
+    http://localhost:8000/vehicles
+    http://localhost:8000/ride-info
+    http://localhost:8000/payment-info
+    http://localhost:8000/paymentConfirmation
+    http://localhost:8000/dashboard/history
+    http://localhost:8000/dashboard/reservation
+
+- Admin Views:
+    http://localhost:8000/admin/users
+    http://localhost:8000/admin/vendors
+    http://localhost:8000/admin/transactions
+
+- Vendor Views:
+    http://localhost:8000/vendor/vehicles
+    http://localhost:8000/vendor/reservations
+    http://localhost:8000/vendor/Booking-History
+
 ## Team Members and Contribution
 1. **Samruddhi Chavan [N01604191]**: Database Design, Public Views (Home, Login, Register) & Payment Module  
 2. **Sruthi Pandiath [N01618202]**: Vendor Module & Testing
