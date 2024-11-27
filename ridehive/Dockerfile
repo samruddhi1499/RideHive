@@ -1,10 +1,11 @@
-# Stage 1: Build Stage
-FROM php:8.2-fpm AS build
+# Use PHP 8.2 with Nginx for production
+FROM php:8.2-fpm
 
+# Set the working directory
 WORKDIR /var/www
 
-# Install system dependencies and PHP extensions
-RUN apt-get update && apt-get install -y \
+# Install system dependencies, MySQL PDO extension, and Node.js 20.x
+RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     unzip \
     curl \
@@ -12,54 +13,61 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     default-mysql-client \
-    libzip-dev \
-    && docker-php-ext-install pdo_mysql bcmath mbstring \
-    && apt-get clean
+    supervisor \
+    && docker-php-ext-install pdo_mysql \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install Node.js 20.x and npm
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs
+    apt-get install -y nodejs && \
+    rm -rf /var/lib/apt/lists/*
 
 # Copy application files to the container
 COPY . .
 
-# Install PHP dependencies (Composer)
-RUN composer install --no-dev --optimize-autoloader
+# Set the correct permissions for Laravel storage and cache directories
+RUN chown -R www-data:www-data /var/www && \
+    chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+
+# Configure Git to allow safe directories
+RUN git config --global --add safe.directory /var/www
+
+# Clean up and reset the vendor directory to avoid conflicts
+RUN rm -rf /var/www/vendor && \
+    mkdir -p /var/www/vendor
+
+# Install PHP dependencies, including Laravel Breeze
+RUN composer install --no-dev --optimize-autoloader && \
+    composer require laravel/breeze --dev && \
+    php artisan breeze:install blade
 
 # Install Node.js dependencies
 RUN npm install
 
+# Install TailwindCSS, PostCSS, Autoprefixer, and Vite
+RUN npm install tailwindcss postcss autoprefixer vite && \
+    chmod +x ./node_modules/.bin/* && \
+    npx tailwindcss init
+
 # Compile assets using Vite
-RUN npm run build
-
-# Stage 2: Production Stage
-FROM php:8.2-fpm
-
-WORKDIR /var/www
-
-# Copy over the application from the build stage
-COPY --from=build /var/www /var/www
-
-# Set the correct permissions for Laravel storage and cache directories
-RUN chown -R www-data:www-data /var/www \
-    && chmod -R 755 /var/www/storage /var/www/bootstrap/cache
-
-# Set permissions for node_modules to allow execution of Vite
-RUN chmod -R 755 node_modules
+RUN chmod +x ./node_modules/.bin/vite && npm run build
 
 # Clear and cache configurations, routes, and views for better performance
-RUN php artisan config:clear && php artisan config:cache
-RUN php artisan route:clear && php artisan route:cache
-RUN php artisan view:clear && php artisan view:cache
+RUN php artisan config:clear && php artisan config:cache && \
+    php artisan route:clear && php artisan route:cache && \
+    php artisan view:clear && php artisan view:cache && \
+    php artisan optimize
 
 # Ensure the Laravel storage and cache directories are writable
 RUN chmod -R 775 storage bootstrap/cache
 
+
+
+# Use Supervisord to serve Laravel
+CMD supervisord -c /etc/supervisor/conf.d/supervisord.conf
+
 # Expose port 8000
 EXPOSE 8000
-
-# Start the application
-CMD php artisan serve --host=0.0.0.0 --port=8000
