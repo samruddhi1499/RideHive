@@ -26,17 +26,26 @@ Route::post('register', [AuthController::class, 'register']);
 // Step 1 - Vehicle List
 Route::get('vehicles', [RidePaymentController::class, 'showAllVehicles'])->name('vehicles');
 
+Route::prefix('user')->group(function () {
+
+    
 // Step 2 - Ride Info Form
 Route::get('ride-info', [RidePaymentController::class, 'showRideInfoForm'])->name('rideInfo');
 //Route::get('ride-info', [RidePaymentController::class, 'showRideInfoForm'])->name('rideInfo');
 
 // Step 3 - Payment Details Form
-Route::get('payment-info', [RidePaymentController::class, 'showPaymentForm'])->name('paymentInfo');
+Route::post('payment-info', [RidePaymentController::class, 'showPaymentForm'])->name('paymentInfo');
 //Route::get('payment-info', [RidePaymentController::class, 'showPaymentForm'])->name('paymentInfo');
 
+Route::post('stripe', [RidePaymentController::class, 'stripe'])->name('stripe');
+
 // Step 4 - Confirmation and Payment
+
 Route::get('paymentConfirmation', [RidePaymentController::class, 'submitRide'])->name('paymentConfirmation');
 //Route::post('paymentConfirmation', [RidePaymentController::class, 'submitRide'])->name('paymentConfirmation');
+
+});
+
 
 Route::prefix('dashboard')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
