@@ -42,7 +42,9 @@ RUN rm -rf /var/www/vendor && \
 # Install PHP dependencies, including Laravel Breeze
 RUN composer install --no-dev --optimize-autoloader && \
     composer require laravel/breeze --dev && \
-    php artisan breeze:install blade \ composer require stripe/stripe-php
+    php artisan breeze:install blade
+    
+RUN composer require stripe/stripe-php
 
 # Install Node.js dependencies
 RUN npm install
