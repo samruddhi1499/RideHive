@@ -33,7 +33,7 @@ A platform for users to rent bikes and scooters online. Vendors can list vehicle
 - User Views:
     - http://localhost:8000/dashboard
     - http://localhost:8000/vehicles
-    - http://localhost:8000/ride-info
+    - http://localhost:8000/ride-info 
     - http://localhost:8000/payment-info
     - http://localhost:8000/paymentConfirmation
     - http://localhost:8000/dashboard/history
