@@ -1,47 +1,66 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
 
 class AuthController extends Controller
 {
-    // Display the login page
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
-    // Handle login form submission
     public function login(Request $request)
     {
-        // Basic validation
-        $validated = $request->validate([
+        $credentials = $request->validate([
             'email' => 'required|email',
-            'password' => 'required|min:6',
+            'password' => 'required',
         ]);
 
-        // For now, let's assume validation passes and redirect to home
-        return redirect('/')->with('status', 'Login successful');
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('dashboard');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
     }
 
-    // Display the registration page
+    // Show Registration Form
     public function showRegistrationForm()
     {
         return view('auth.register');
     }
 
-    // Handle registration form submission
+    // Handle Registration
     public function register(Request $request)
     {
-        // Basic validation
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
+        // Validate Input
+        $request->validate([
+            'name' => 'required|string|max:100',
             'email' => 'required|email|unique:users,email',
+            'contact' => 'nullable|string|max:255',
             'password' => 'required|min:6|confirmed',
         ]);
 
-        // For now, let's assume validation passes and redirect to home
-        return redirect('/')->with('status', 'Registration successful');
+        // Create User
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'contact' => $request->contact, // Save contact number (nullable)
+            'password' => Hash::make($request->password),
+            'role' => 'User', // Default role
+            'status' => 'Pending', // Default status
+        ]);
+
+        // Redirect to Login Page with Success Message
+        return redirect()->route('login')->with('success', 'Registration successful! Please login.');
     }
+
 }
