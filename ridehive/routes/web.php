@@ -60,11 +60,7 @@ Route::get('paymentConfirmation', [RidePaymentController::class, 'submitRide'])-
 });
 
 
-Route::prefix('dashboard')->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::get('/history', [DashboardController::class, 'history'])->name('dashboard.history');
-    Route::get('/reservation', [DashboardController::class, 'reservation'])->name('dashboard.reservation');
-});
+
 
 
 
@@ -126,9 +122,19 @@ Route::prefix('admin')->group(function () {
 
 
 
-    
+
+   
 
     // Add routes for other admin pages later
+});
+
+Route::middleware('auth')->group(function () {
+    Route::prefix('dashboard')->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+        Route::get('/history', [DashboardController::class, 'history'])->name('dashboard.history');
+        Route::get('/dashboard/reservation', [DashboardController::class, 'reservation'])->name('dashboard.reservation');
+
+    });
 });
 
 Route::prefix('vendor')->group(function () {

@@ -7,9 +7,13 @@
     <!-- Sidebar -->
     <aside class="w-1/5 bg-[#e75480] p-6 shadow-md border-r border-gray-200 flex flex-col justify-between">
         <nav class="space-y-6 mt-8">
+        <a href="{{ route('dashboard.index') }}" class="flex items-center text-white hover:text-gray-200 font-medium">
+                <span class="material-icons">dashboard</span>
+                <span class="ml-2">Dashboard</span>
+            </a>
             <a href="{{ route('vehicles') }}" class="flex items-center text-white hover:text-gray-200 font-medium">
                 <span class="material-icons">directions_bike</span>
-                <span class="ml-2">Book</span>
+                <span class="ml-2">Book Ride</span>
             </a>
             <a href="{{ route('dashboard.history') }}" class="flex items-center text-white hover:text-gray-200 font-medium">
                 <span class="material-icons">history</span>
@@ -17,7 +21,7 @@
             </a>
             <a href="{{ route('dashboard.reservation') }}" class="flex items-center text-white hover:text-gray-200 font-medium">
                 <span class="material-icons">event</span>
-                <span class="ml-2">Reservation</span>
+                <span class="ml-2">Payment History</span>
             </a>
         </nav>
     </aside>
@@ -27,36 +31,34 @@
     @hasSection('dashboard-content')
             @yield('dashboard-content')
         @else
-        <div>
-            <!-- Header -->
-            <div class="flex justify-between items-center mb-6">
-                <h1 class="text-3xl font-semibold text-[#e75480]">Rental Dashboard</h1>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        <!-- Total Available Vehicles -->
+        <div class="bg-green-100 p-6 rounded-lg shadow-md flex items-center justify-between">
+            <div>
+                <h2 class="text-lg font-semibold text-gray-600">Total Available Vehicles</h2>
+                <p class="text-3xl font-bold text-gray-800 mt-2">{{ $totalAvailableVehicles }}</p>
             </div>
+            <span class="material-icons text-green-500 text-4xl">directions_car</span>
+        </div>
 
-            <!-- Metric Cards -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                <div class="bg-green-100 p-6 rounded-lg shadow-md flex items-center justify-between">
-                    <div>
-                        <h2 class="text-lg font-semibold text-gray-600">Revenue</h2>
-                        <p class="text-3xl font-bold text-gray-800 mt-2">$1200.45</p>
-                    </div>
-                    <span class="material-icons text-green-500 text-4xl">bar_chart</span>
-                </div>
-                <div class="bg-yellow-100 p-6 rounded-lg shadow-md flex items-center justify-between">
-                    <div>
-                        <h2 class="text-lg font-semibold text-gray-600">Expenses</h2>
-                        <p class="text-3xl font-bold text-gray-800 mt-2">$400</p>
-                    </div>
-                    <span class="material-icons text-yellow-500 text-4xl">pie_chart</span>
-                </div>
-                <div class="bg-blue-100 p-6 rounded-lg shadow-md flex items-center justify-between">
-                    <div>
-                        <h2 class="text-lg font-semibold text-gray-600">Reservations</h2>
-                        <p class="text-3xl font-bold text-gray-800 mt-2">Pending</p>
-                    </div>
-                    <span class="material-icons text-blue-500 text-4xl">description</span>
-                </div>
+        <!-- Total Bookings for User -->
+        <div class="bg-yellow-100 p-6 rounded-lg shadow-md flex items-center justify-between">
+            <div>
+                <h2 class="text-lg font-semibold text-gray-600">Total Bookings</h2>
+                <p class="text-3xl font-bold text-gray-800 mt-2">{{ $totalBookings }}</p>
             </div>
+            <span class="material-icons text-yellow-500 text-4xl">calendar_today</span>
+        </div>
+
+        <!-- Total Payments for User -->
+        <div class="bg-blue-100 p-6 rounded-lg shadow-md flex items-center justify-between">
+            <div>
+                <h2 class="text-lg font-semibold text-gray-600">Total Payments</h2>
+                <p class="text-3xl font-bold text-gray-800 mt-2">${{ number_format($totalPayments, 2) }}</p>
+            </div>
+            <span class="material-icons text-blue-500 text-4xl">account_balance_wallet</span>
+        </div>
+    </div>
 
             <!-- Property Locations -->
 <div class="bg-white p-6 rounded-lg shadow mb-8 mt-6">
@@ -72,41 +74,7 @@
             loading="lazy">
         </iframe>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-gray-100 p-4 rounded-lg shadow flex items-center space-x-4">
-            <img src="/white-cycle.jpg" alt="Property" class="w-20 h-20 rounded">
-            <div>
-                <h3 class="text-lg font-semibold text-gray-800">Temple City, Thanjavur</h3>
-                <p class="text-sm text-gray-600">Occupied</p>
-                <p class="text-sm text-gray-600">$2500 / year</p>
-            </div>
-        </div>
-        <div class="bg-gray-100 p-4 rounded-lg shadow flex items-center space-x-4">
-            <img src="/cycle2.jpg" alt="Property" class="w-20 h-20 rounded">
-            <div>
-                <h3 class="text-lg font-semibold text-gray-800">Pearl Apartments</h3>
-                <p class="text-sm text-gray-600">For Rent</p>
-                <p class="text-sm text-gray-600">$3000 / year</p>
-            </div>
-        </div>
-        <div class="bg-gray-100 p-4 rounded-lg shadow flex items-center space-x-4">
-            <img src="/scooter1.jpg" alt="Property" class="w-20 h-20 rounded">
-            <div>
-                <h3 class="text-lg font-semibold text-gray-800">Pearl Apartments</h3>
-                <p class="text-sm text-gray-600">For Rent</p>
-                <p class="text-sm text-gray-600">$3000 / year</p>
-            </div>
-        </div>
-        <div class="bg-gray-100 p-4 rounded-lg shadow flex items-center space-x-4">
-            <img src="/scooter2.jpg" alt="Property" class="w-20 h-20 rounded">
-            <div>
-                <h3 class="text-lg font-semibold text-gray-800">Pearl Apartments</h3>
-                <p class="text-sm text-gray-600">For Rent</p>
-                <p class="text-sm text-gray-600">$3000 / year</p>
-            </div>
-        </div>
-    </div>
-</div>
+    
 
         </div>
         @endif
