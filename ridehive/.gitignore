@@ -18,6 +18,7 @@ Homestead.json
 *.seed
 *.bak
 
+
 # IDE-specific files
 .idea/
 .vscode/
@@ -30,6 +31,8 @@ Thumbs.db
 .env.backup
 .env.local
 *.sqlite
+.env
+.env.example
 
 # Tailwind and build files
 resources/css/app.css

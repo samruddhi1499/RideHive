@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
         UsersTableSeeder::class,
         VehiclesTableSeeder::class,
         BookingsTableSeeder::class,
-        AvailabilityTableSeeder::class,
         PaymentsTableSeeder::class,
         FeedbackTableSeeder::class,
     ]);
