@@ -26,12 +26,12 @@
                     <td class="py-2 px-4">{{ $vehicle->type }}</td>
                     <td class="py-2 px-4">${{ number_format($vehicle->price_per_day, 2) }}</td>
                     <td class="py-2 px-4">
-                        @if($vehicle->image)
-                            <img src="{{ asset('storage/' . $vehicle->image) }}" alt="{{ $vehicle->model }}" class="w-20 h-20 object-cover rounded">
-                        @else
-                            <span class="text-gray-500">No Image</span>
-                        @endif
-                    </td>
+    @if($vehicle->image)
+        <img src="data:image/jpeg;base64,{{ base64_encode($vehicle->image) }}" alt="{{ $vehicle->model }}" class="w-20 h-20 object-cover rounded">
+    @else
+        <span class="text-gray-500">No Image</span>
+    @endif
+</td>
                     <td class="py-2 px-4">
                         <span class="{{ $vehicle->status == 'Available' ? 'text-green-500' : 'text-red-500' }}">
                             {{ $vehicle->status }}

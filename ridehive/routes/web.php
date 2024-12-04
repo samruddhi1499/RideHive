@@ -134,7 +134,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
         Route::get('/history', [DashboardController::class, 'history'])->name('dashboard.history');
         Route::get('/dashboard/reservation', [DashboardController::class, 'reservation'])->name('dashboard.reservation');
-        Route::get('/vehicles', [VehicleController::class, 'index'])->name('vehicles');
+        Route::get('/vehicles', [VehicleController::class, 'index'])->name('payment.vehicleList');
     });
 });
 Route::get('/vehicles', [VehicleController::class, 'index'])->name('vehicles');
@@ -142,13 +142,13 @@ Route::get('/vehicles', [VehicleController::class, 'index'])->name('vehicles');
 Route::prefix('vendor')->group(function () {
 
     // Reservations Page
-    Route::get('/reservations', [VehicleController::class, 'reservations'])->name('vendor-role.reservations');
+    Route::get('/reservations/{vendorId}', [VehicleController::class, 'reservations'])->name('vendor-role.reservations');
 
     // Booking History Page
-    Route::get('/booking-history', [VehicleController::class, 'bookingHistory'])->name('vendor-role.bookingHistory');
+    Route::get('/Booking-History/{vendorId}', [VehicleController::class, 'bookingHistory'])->name('vendor-role.bookingHistory');
 
     // List Vehicles
-    Route::get('/vehicles', [VehicleController::class, 'index'])->name('vendor-role.vehicles');
+    Route::get('/vehicles', [VehicleController::class, 'showAllVehicles'])->name('vendor-role.vehicles');
 
     // Add New Vehicle
     Route::get('/vehicles/create', [VehicleController::class, 'create'])->name('vendor-role.vehicles.create');

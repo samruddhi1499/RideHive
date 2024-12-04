@@ -8,8 +8,13 @@
         <nav class="space-y-4">
      
             <a href="{{ url('/vendor/vehicles') }}" class="block text-white hover:bg-white hover:text-[#e75480] p-2 rounded">Vehicles</a>
-            <a href="{{ url('/vendor/reservations') }}" class="block text-white hover:bg-white hover:text-[#e75480] p-2 rounded">Reservations</a>
-            <a href="{{ url('/vendor/Booking-History') }}" class="block text-white hover:bg-white hover:text-[#e75480] p-2 rounded">Booking History</a>
+            <a href="{{ route('vendor-role.reservations', ['vendorId' => 1]) }}" 
+   class="block text-white hover:bg-white hover:text-[#e75480] p-2 rounded">
+   Reservations
+</a>
+
+
+                  <a href="{{ route('vendor-role.bookingHistory', ['vendorId' => 1]) }}" class="block text-white hover:bg-white hover:text-[#e75480] p-2 rounded">Booking History</a>
         </nav>
     </aside>
 

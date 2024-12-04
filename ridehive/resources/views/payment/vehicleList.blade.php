@@ -8,7 +8,13 @@
     @foreach($vehicles as $vehicle)
         <div class="bg-white p-4 rounded-lg shadow">
             <div class="w-full h-48 overflow-hidden rounded-lg mb-4">
-                <img src="/placeholder.jpg" alt="{{ $vehicle->model }}" class="w-full h-full object-cover">
+                @if($vehicle->image)
+                    <img src="data:image/jpeg;base64,{{ base64_encode($vehicle->image) }}" 
+                         alt="{{ $vehicle->model }}" 
+                         class="w-full h-full object-cover">
+                @else
+                    <img src="/placeholder.jpg" alt="No Image Available" class="w-full h-full object-cover">
+                @endif
             </div>
             <h3 class="text-lg font-semibold text-[#e75480] mb-2">{{ $vehicle->model }}</h3>
             <p class="text-gray-600"><strong>Type:</strong> {{ ucfirst($vehicle->type) }}</p>

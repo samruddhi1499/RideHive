@@ -88,7 +88,5 @@ class DashboardController extends Controller
         'payments' => $payments
     ]);
 }
-
-
     
 }

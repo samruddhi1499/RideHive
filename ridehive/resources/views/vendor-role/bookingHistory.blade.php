@@ -12,8 +12,10 @@
         <div class="relative w-1/3">
             <input 
                 type="text" 
+                id="searchInput" 
                 placeholder="Search bookings..." 
                 class="border rounded-full py-2 pl-12 pr-4 w-full focus:outline-none focus:ring-2 focus:ring-[#e75480]"
+                onkeyup="filterTable()" 
             >
             <svg 
                 class="absolute top-2 left-4 w-5 h-5 text-gray-400" 
@@ -32,7 +34,7 @@
         </div>
     </div>
 
-    <table class="w-full border-collapse">
+    <table class="w-full border-collapse" id="bookingsTable">
         <thead class="bg-gray-100 text-left">
             <tr>
                 <th class="py-2 px-4">Booking ID</th>
@@ -40,33 +42,58 @@
                 <th class="py-2 px-4">Vehicle</th>
                 <th class="py-2 px-4">Pickup Location</th>
                 <th class="py-2 px-4">Dropoff Location</th>
-                <th class="py-2 px-4">Booking Date</th>
+                <th class="py-2 px-4">Start Date</th>
+                <th class="py-2 px-4">End Date</th>
                 <th class="py-2 px-4">Status</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Example Rows -->
-            <tr class="border-t">
-                <td class="py-2 px-4">101</td>
-                <td class="py-2 px-4">John Doe</td>
-                <td class="py-2 px-4">Scooter X1</td>
-                <td class="py-2 px-4">Central Park</td>
-                <td class="py-2 px-4">Times Square</td>
-                <td class="py-2 px-4">2024-11-20</td>
-                <td class="py-2 px-4 text-green-500">Completed</td>
-                
-            </tr>
-            <tr class="border-t bg-gray-50">
-                <td class="py-2 px-4">102</td>
-                <td class="py-2 px-4">Jane Smith</td>
-                <td class="py-2 px-4">Bike Y2</td>
-                <td class="py-2 px-4">Downtown</td>
-                <td class="py-2 px-4">City Square</td>
-                <td class="py-2 px-4">2024-11-21</td>
-                <td class="py-2 px-4 text-yellow-500">Canceled</td>
-                
-            </tr>
+            @forelse ($bookings as $booking)
+                <tr class="border-t">
+                    <td class="py-2 px-4">{{ $booking->booking_id }}</td>
+                    <td class="py-2 px-4">{{ $booking->user->name }}</td>
+                    <td class="py-2 px-4">{{ $booking->vehicle->model }}</td>
+                    <td class="py-2 px-4">{{ $booking->pickup_location }}</td>
+                    <td class="py-2 px-4">{{ $booking->dropoff_location }}</td>
+                    <td class="py-2 px-4">{{ $booking->start_date }}</td>
+                    <td class="py-2 px-4">{{ $booking->end_date }}</td>
+                    <td class="py-2 px-4 {{ $booking->payment_status === 'Paid' ? 'text-green-500' : 'text-yellow-500' }}">
+                        {{ $booking->payment_status }}
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="8" class="py-2 px-4 text-center">No bookings found.</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>
+
+<script>
+    function filterTable() {
+        // Get search input value
+        const searchInput = document.getElementById('searchInput').value.toLowerCase();
+        const table = document.getElementById('bookingsTable');
+        const rows = table.getElementsByTagName('tr');
+
+        // Loop through rows (skip the header row)
+        for (let i = 1; i < rows.length; i++) {
+            const cells = rows[i].getElementsByTagName('td');
+            let rowMatches = false;
+
+            // Check each cell in the row
+            for (let j = 0; j < cells.length; j++) {
+                const cellValue = cells[j].textContent || cells[j].innerText;
+                if (cellValue.toLowerCase().includes(searchInput)) {
+                    rowMatches = true;
+                    break;
+                }
+            }
+
+            // Show or hide the row based on the match
+            rows[i].style.display = rowMatches ? '' : 'none';
+        }
+    }
+</script>
 @endsection
