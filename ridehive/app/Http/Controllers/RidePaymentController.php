@@ -63,7 +63,6 @@ class RidePaymentController extends Controller
             session()->put('end_date', $request->end_date);
             session()->put('paymentMethod', $request->payment_method);
             session()->put('paymentDate', $request->payment_date);
-            session()->put('user_id', 1);
             session()->put('vehicle_id', 1);
             session()->put('status', "Successful");
             return redirect($response->url);
@@ -102,6 +101,7 @@ class RidePaymentController extends Controller
         // Step 2: Save Payment (with foreign key to Booking)
         $payment = new Payment();
         $payment->booking_id = $booking->booking_id; // Use the ID of the saved Booking as the foreign key
+        $payment->user_id = session()->get('user_id');
         $payment->amount = session()->get('price');
         $payment->payment_method = session()->get('paymentMethod');
         $payment->payment_date = session()->get('paymentDate');

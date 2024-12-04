@@ -24,6 +24,8 @@ Homestead.json
 .vscode/
 *.swp
 *.iml
+*.sublime-workspace
+*.sublime-project
 
 # Temporary Files
 .DS_Store
@@ -32,12 +34,13 @@ Thumbs.db
 .env.local
 *.sqlite
 .env
-.env.example
+.env.*
 
 # Tailwind and build files
 resources/css/app.css
 public/css/*
 public/js/*
+resources/js/*.map
 
 # Logs and caches
 /storage/logs/*.log
@@ -53,7 +56,15 @@ storage/logs/*
 
 # Composer and npm files
 composer.lock
-npm-debug.log
-yarn-error.log
+npm-debug.log*
+yarn-error.log*
+package-lock.json
+pnpm-lock.yaml
 
-.env
+# Build artifacts
+*.gz
+*.zip
+*.tar.gz
+
+# PHPUnit result cache
+.phpunit.result.cache

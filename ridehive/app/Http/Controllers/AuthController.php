@@ -21,16 +21,22 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
+    
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+    
+            // Store the user ID in the session
+            $userId = Auth::id(); // Get the authenticated user's ID
+            $request->session()->put('user_id', $userId);
+    
             return redirect()->intended('dashboard');
         }
-
+    
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
+    
 
     // Show Registration Form
     public function showRegistrationForm()
@@ -58,6 +64,7 @@ class AuthController extends Controller
             'role' => 'User', // Default role
             'status' => 'Pending', // Default status
         ]);
+
 
         // Redirect to Login Page with Success Message
         return redirect()->route('login')->with('success', 'Registration successful! Please login.');

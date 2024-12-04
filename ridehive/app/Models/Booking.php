@@ -29,4 +29,15 @@ class Booking extends Model
         'total_cost',
         'payment_status'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'user_id'); // Adjust the foreign and local keys
+    }
+
+ 
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class, 'vehicle_id', 'vehicle_id');
+    }
 }
