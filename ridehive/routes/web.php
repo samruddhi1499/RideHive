@@ -6,6 +6,7 @@ use App\Http\Controllers\RidePaymentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminVehicleController;
+use App\Http\Controllers\VehicleController;
 
 
 
@@ -133,9 +134,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
         Route::get('/history', [DashboardController::class, 'history'])->name('dashboard.history');
         Route::get('/dashboard/reservation', [DashboardController::class, 'reservation'])->name('dashboard.reservation');
-
+        Route::get('/vehicles', [VehicleController::class, 'index'])->name('vehicles');
     });
 });
+Route::get('/vehicles', [VehicleController::class, 'index'])->name('vehicles');
 
 Route::prefix('vendor')->group(function () {
     Route::get('/reservations', function () {
