@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('model', 100);
             $table->decimal('price_per_day', 10, 2);
             $table->enum('status', ['Available', 'Unavailable'])->default('Available');
-            $table->timestamps();
+            $table->longBlob('image')->nullable(); // Change to LONGBLOB
+            $table->timestamps(); // Automatically adds `created_at` and `updated_at`
         });
     }
     

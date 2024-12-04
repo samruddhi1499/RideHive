@@ -6,6 +6,8 @@ use App\Http\Controllers\RidePaymentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminVehicleController;
+use App\Http\Controllers\VehicleController;
+
 
 
 
@@ -132,16 +134,29 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::prefix('vendor')->group(function () {
-    Route::get('/reservations', function () {
-        return view('vendor-role.reservations');
-    })->name('vendor-role.reservations');
 
-    Route::get('/Booking-History', function () {
-        return view('vendor-role.bookingHistory');
-    })->name('vendor-role.bookingHistory');
+    // Reservations Page
+    Route::get('/reservations', [VehicleController::class, 'reservations'])->name('vendor-role.reservations');
 
-    Route::get('/vehicles', function () {
-        return view('vendor-role.vehicles');
-    })->name('vendor-role.vehicles');
+    // Booking History Page
+    Route::get('/booking-history', [VehicleController::class, 'bookingHistory'])->name('vendor-role.bookingHistory');
+
+    // List Vehicles
+    Route::get('/vehicles', [VehicleController::class, 'index'])->name('vendor-role.vehicles');
+
+    // Add New Vehicle
+    Route::get('/vehicles/create', [VehicleController::class, 'create'])->name('vendor-role.vehicles.create');
+    Route::post('/vehicles', [VehicleController::class, 'store'])->name('vendor-role.vehicles.store');
+
+    // Edit Vehicle
+    Route::get('vehicles/{vehicle}/edit', [VehicleController::class, 'edit'])->name('vendor-role.vehicles.edit');
+    Route::put('/vehicles/{vehicle}', [VehicleController::class, 'update'])->name('vendor-role.vehicles.update');
+
+    // Delete Vehicle
+    Route::delete('/vehicles/{vehicle}', [VehicleController::class, 'destroy'])->name('vendor-role.vehicles.destroy');
+
+    // View Specific Reservation
+    Route::get('/reservations/{reservation}', [VehicleController::class, 'viewReservation'])->name('vendor-role.reservations.view');
+
+    // Profile Page (Optional)
 });
-
