@@ -5,17 +5,12 @@
         </h1>
          <!-- Navigation -->
          <nav class="space-x-6 text-gray-600">
-            @if(request()->is('dashboard*') || request()->is('admin*'))
+            @if(request()->is('dashboard*') || request()->is('admin*') || request()->is('vendor*')|| request()->is('user*'))
                 <!-- Dashboard Header Icons -->
-                <a href="#" class="text-gray-600 hover:text-[#e75480]">
-                    <span class="material-icons">notifications</span>
+                <a href="{{ route('login') }}" class="text-gray-600 hover:text-[#e75480]">
+                    <span >Logout</span>
                 </a>
-                <a href="#" class="text-gray-600 hover:text-[#e75480]">
-                    <span class="material-icons">search</span>
-                </a>
-                <a href="#" class="text-gray-600 hover:text-[#e75480]">
-                    <span class="material-icons">account_circle</span>
-                </a>
+              
             @else
             <a href="/" class="hover:text-[#e75480]  hover:font-semibold hover:shadow-sm">Home</a>
             <a href="{{ route('login') }}" class="hover:text-[#e75480]  hover:font-semibold hover:shadow-sm">Login</a>

@@ -11,7 +11,7 @@
                 <span class="material-icons">dashboard</span>
                 <span class="ml-2">Dashboard</span>
             </a>
-            <a href="{{ route('vehicles') }}" class="flex items-center text-white hover:text-gray-200 font-medium">
+            <a href="{{ route('payment.vehicleList') }}" class="flex items-center text-white hover:text-gray-200 font-medium">
                 <span class="material-icons">directions_bike</span>
                 <span class="ml-2">Book Ride</span>
             </a>

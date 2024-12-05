@@ -44,10 +44,9 @@
             </div>
             <div>
                 <label for="status" class="block text-gray-600">Status</label>
-                <select id="status" name="status" class="border rounded w-full py-2 px-4 focus:ring-[#e75480]">
-                    <option value="Available">Available</option>
-                    <option value="Unavailable">Unavailable</option>
-                </select>
+                <input type="texr" id="status" name="status"
+                    class="border rounded w-full py-2 px-4 focus:ring-[#e75480]" value="Unavailable"
+                    step="0.01" readonly>
             </div>
         </div>
         <div>

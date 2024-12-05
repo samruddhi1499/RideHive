@@ -14,8 +14,10 @@ class VehicleController extends Controller
     // Display the list of vehicles
     public function index()
     {
-        $vehicles = Vehicle::all(); // Fetch all vehicles
-        return view('payment.vehicleList', compact('vehicles')); // Render the vehicles view
+        $vehicles = Vehicle::where('status', 'Available')->get();
+
+        // Pass the vehicles to the view
+        return view('payment.vehicleList', compact('vehicles'));// Render the vehicles view
     }
 
     public function showAllVehicles(Request $request)
@@ -33,6 +35,7 @@ class VehicleController extends Controller
 
     public function store(Request $request)
     {
+        Log::info('Reservations fetched for vendor ID ' . $request->session()->get('user_id'));
         $request->validate([
             'model' => 'required|string|max:100',
             'type' => 'required|in:Bike,Scooter',

@@ -59,18 +59,36 @@ class RidePaymentController extends Controller
     // Show Payment Form
     public function showPaymentForm()
     {
-       
+        $vehicle_id = session('vehicle_id');
+        $start_date = session('start_date');
+    
+        // Check if the start_date conflicts with an existing booking for the same vehicle
+        $existingAvailability = Availability::where('vehicle_id', $vehicle_id)
+            ->where(function ($query) use ($start_date) {
+                $query->where('start_date', '<=', $start_date)
+                      ->where('end_date', '>=', $start_date);
+            })
+            ->first();
+    
+        if ($existingAvailability) {
+            // Redirect to the dashboard if the vehicle is already booked for the given date range
+            return view('payment.bookingError');
+        }
+    
+        // Proceed to payment form if no conflicting availability exists
         $data = [
             'pickup_location' => session('pickup_location'),
             'dropoff_location' => session('dropoff_location'),
-            'start_date' => session('start_date'),
+            'start_date' => $start_date,
             'end_date' => session('end_date'),
             'vehicle_model' => session('vehicle_model'),
             'price' => session('price'),
+            'vehicle_id' => $vehicle_id,
         ];
-
+    
         return view('payment.paymentInfo', $data);
     }
+    
 
     public function stripe(Request $request)
     {

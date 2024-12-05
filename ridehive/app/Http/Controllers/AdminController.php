@@ -20,11 +20,11 @@ class AdminController extends Controller
 
     public function showUsers()
     {
-        // Fetch all users
-        $users = User::all();
 
-        // Pass users to the view
+        $users = User::where('role', 'User')->get();
         return view('admin.view-users', compact('users'));
+        // Fetch all users
+        
     }
 
     public function deleteUser($user_id)
