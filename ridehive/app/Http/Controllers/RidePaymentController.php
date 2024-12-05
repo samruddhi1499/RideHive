@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use App\Models\Payment;
 use App\Models\Booking;
 use App\Models\Availability;
+use App\Models\Vehicle;
+use Illuminate\Support\Carbon;
 
 class RidePaymentController extends Controller
 {
@@ -13,18 +15,61 @@ class RidePaymentController extends Controller
         return view('payment.vehicleList');
     }
 
-    public function showRideInfoForm()
+    public function showRideInfoForm($id)
     {
-        return view('payment.rideInfo');
+        // Pass vehicle ID to the view
+        return view('payment.rideInfo', ['vehicle_id' => $id]);
     }
 
-    // Step 2: Show payment info form
-    public function showPaymentForm(Request $request)
+    // Store Ride Data
+    public function storeRideData(Request $request, $vehicle_id)
     {
-        // Retrieve data from the session
-        //$rideData = session('rideData');
+        $request->validate([
+            'pickup_location' => 'required|string|max:255',
+            'dropoff_location' => 'required|string|max:255',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after:start_date',
+        ]);
 
-        return view('payment.paymentInfo');
+        // Fetch vehicle by ID
+        $vehicle = Vehicle::find($vehicle_id);
+        if (!$vehicle) {
+            return redirect()->back()->with('error', 'Vehicle not found.');
+        }
+
+        // Calculate price
+        $start = Carbon::parse($request->start_date);
+        $end = Carbon::parse($request->end_date);
+        $days = $start->diffInDays($end);
+        $price = $days * $vehicle->price_per_day;
+
+        // Store data in session
+        session()->put('vehicle_model', $vehicle->model);
+        session()->put('vehicle_id', $vehicle_id);
+        session()->put('price', $price);
+        session()->put('pickup_location', $request->pickup_location);
+        session()->put('dropoff_location', $request->dropoff_location);
+        session()->put('start_date', $request->start_date);
+        session()->put('end_date', $request->end_date);
+
+        // Redirect to payment info
+        return redirect()->route('paymentInfo');
+    }
+
+    // Show Payment Form
+    public function showPaymentForm()
+    {
+       
+        $data = [
+            'pickup_location' => session('pickup_location'),
+            'dropoff_location' => session('dropoff_location'),
+            'start_date' => session('start_date'),
+            'end_date' => session('end_date'),
+            'vehicle_model' => session('vehicle_model'),
+            'price' => session('price'),
+        ];
+
+        return view('payment.paymentInfo', $data);
     }
 
     public function stripe(Request $request)
@@ -55,15 +100,9 @@ class RidePaymentController extends Controller
         ]);
     
         if (isset($response->id) && $response->id != '') {
-            session()->put('product_name', $request->product_name);
-            session()->put('price', $request->price);
-            session()->put('pickup_location', $request->pickup_location);
-            session()->put('dropoff_location', $request->dropoff_location);
-            session()->put('start_date', $request->start_date);
-            session()->put('end_date', $request->end_date);
+            
             session()->put('paymentMethod', $request->payment_method);
             session()->put('paymentDate', $request->payment_date);
-            session()->put('vehicle_id', 1);
             session()->put('status', "Successful");
             return redirect($response->url);
 

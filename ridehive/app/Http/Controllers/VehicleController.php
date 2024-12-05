@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Vehicle;
 use App\Models\Booking;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 
 
 class VehicleController extends Controller
@@ -108,7 +109,7 @@ class VehicleController extends Controller
         })
             ->where('end_date', '>=', $currentDate) // Filter by end_date >= current date
             ->get();
-        \Log::info('Reservations fetched for vendor ID ' . $vendorId, [
+        Log::info('Reservations fetched for vendor ID ' . $vendorId, [
             'reservations' => $reservations->toArray(),
         ]);
 

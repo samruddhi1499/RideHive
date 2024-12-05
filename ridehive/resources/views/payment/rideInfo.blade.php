@@ -7,7 +7,8 @@
     <div class="bg-white p-8 rounded-lg shadow-lg max-w-2xl mx-auto">
         <h1 class="text-3xl font-semibold text-[#e75480] mb-6 text-center">Ride Information</h1>
 
-        <form action="{{ route('paymentInfo') }}" method="post">
+        <form action="{{ route('storeRideData', ['vehicle_id' => $vehicle_id]) }}" method="POST">
+   
             @csrf
             <!-- Booking Information -->
             <div class="space-y-6">

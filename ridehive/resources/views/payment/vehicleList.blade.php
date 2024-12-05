@@ -25,10 +25,11 @@
                 </span>
             </p>
             <div class="mt-4 flex space-x-2">
-                <a href="{{ route('rideInfo', ['id' => $vehicle->vehicle_id]) }}" 
-                   class="text-[#e75480] border border-[#e75480] rounded px-4 py-1 hover:bg-[#e75480] hover:text-white">
-                    Book
-                </a>        
+            <a href="{{ route('rideInfo', ['id' => $vehicle->vehicle_id]) }}" 
+   class="text-[#e75480] border border-[#e75480] rounded px-4 py-1 hover:bg-[#e75480] hover:text-white">
+    Book
+</a>
+        
             </div>
         </div>
     @endforeach

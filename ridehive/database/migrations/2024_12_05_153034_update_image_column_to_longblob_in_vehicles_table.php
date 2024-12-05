@@ -1,26 +1,26 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class UpdateImageColumnToLongblobInVehiclesTable extends Migration
 {
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
+        // Change the `image` column to `LONGBLOB`
         DB::statement('ALTER TABLE vehicles MODIFY image LONGBLOB');
-
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down()
     {
+        // Revert the `image` column to `BLOB` (or original type)
         DB::statement('ALTER TABLE vehicles MODIFY image BLOB');
-
     }
-};
+}
+

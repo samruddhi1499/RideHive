@@ -37,28 +37,15 @@ Route::get('vehicles', [RidePaymentController::class, 'showAllVehicles'])->name(
 
 
 
-
-
-
 Route::prefix('user')->group(function () {
-
-    
-// Step 2 - Ride Info Form
-Route::get('ride-info', [RidePaymentController::class, 'showRideInfoForm'])->name('rideInfo');
-//Route::get('ride-info', [RidePaymentController::class, 'showRideInfoForm'])->name('rideInfo');
-
-// Step 3 - Payment Details Form
-Route::post('payment-info', [RidePaymentController::class, 'showPaymentForm'])->name('paymentInfo');
-//Route::get('payment-info', [RidePaymentController::class, 'showPaymentForm'])->name('paymentInfo');
-
-Route::post('stripe', [RidePaymentController::class, 'stripe'])->name('stripe');
-
-// Step 4 - Confirmation and Payment
-
-Route::get('paymentConfirmation', [RidePaymentController::class, 'submitRide'])->name('paymentConfirmation');
-//Route::post('paymentConfirmation', [RidePaymentController::class, 'submitRide'])->name('paymentConfirmation');
-
+    Route::get('ride-info/{id}', [RidePaymentController::class, 'showRideInfoForm'])->name('rideInfo');
+    Route::post('store-ride-data/{vehicle_id}', [RidePaymentController::class, 'storeRideData'])->name('storeRideData');
+    Route::get('payment-info', [RidePaymentController::class, 'showPaymentForm'])->name('paymentInfo');
+    Route::post('stripe', [RidePaymentController::class, 'stripe'])->name('stripe');
+    Route::get('paymentConfirmation', [RidePaymentController::class, 'submitRide'])->name('paymentConfirmation');
 });
+
+
 
 
 
