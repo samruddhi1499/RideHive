@@ -10,48 +10,22 @@ A platform for users to rent bikes and scooters online. Vendors can list vehicle
 - **Payment Module**: Secure payment processing.
 
 ## Setup and Access the Application
+
 - Clone the github Link: `https://github.com/samruddhi1499/RideHive.git`
 - Open Windows Powershell and navigate to project folder 
-- Remove the `.\vendor` using command `Remove-Item -Recurse -Force .\vendo`
-- Run following commands:
-    - `composer install `
-    - `php artisan key:generate`
-    - `npm install` and `npm run build`
-- To run the application Run the following commands:
-    - `npm run dev`
-    - Answer `N` to the question
-    - `php artisan serve`
-- Navigate to `localhost:8000/`
+- Run command to deploy on Podman `podman-compose up -d`
+- To run any php related command, enter podman application container using `podman exec -it ridehive_manager_copy bash`
+- To View Database in Podman, run command `podman exec -it mysql_db_copy mysql -u custom_user_copy -pcustom_password_copy ridehive_db_copy` 
+- To Add admin Credentials:
+    - Run command `podman exec -it ridehive_manager_copy bash`
+    - Run command `php artisan db:seed --class=AdminSeeder`
 
 ## Access Links:
-
-- Public Views: 
-    - http://localhost:8000/
-    - http://localhost:8000/login
-    - http://localhost:8000/register
-
-- User Views:
-    - http://localhost:8000/dashboard
-    - http://localhost:8000/vehicles
-    - http://localhost:8000/ride-info 
-    - http://localhost:8000/payment-info
-    - http://localhost:8000/paymentConfirmation
-    - http://localhost:8000/dashboard/history
-    - http://localhost:8000/dashboard/reservation
-
-- Admin Views:
-    - http://localhost:8000/admin/users
-    - http://localhost:8000/admin/vendors
-    - http://localhost:8000/admin/transactions
-
-- Vendor Views:
-    - http://localhost:8000/vendor/vehicles
-    - http://localhost:8000/vendor/reservations
-    - http://localhost:8000/vendor/Booking-History
-
+- Link `http://localhost:8000/`
+    
 ## Team Members and Contribution
-1. **Samruddhi Chavan [N01604191]**: Database Design, Public Views (Home, Login, Register) & Payment Module  
-2. **Sruthi Pandiath [N01618202]**: Vendor Module & Testing
-3. **Saloni Patel [N01603895]**: Admin Module  
-4. **Mitali Sisodia [N01621572]**: User Module & UML
+1. **Samruddhi Chavan [N01604191]**: Database Design, Database Migration, Payment Module and Testing
+2. **Sruthi Pandiath [N01618202]**: Vendor Module
+3. **Saloni Patel [N01603895]**: Admin Module & Register/Login
+4. **Mitali Sisodia [N01621572]**: User Module & Report
 
