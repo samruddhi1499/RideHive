@@ -26,6 +26,10 @@ class AuthController extends Controller
             $request->session()->regenerate();
     
             $user = Auth::user(); // Get the authenticated user
+
+            // Store user-specific data in session
+        $request->session()->put('user_id', $user->user_id);
+        $request->session()->put('role', $user->role);
     
             // Redirect based on role
             if ($user->role === 'Admin') {

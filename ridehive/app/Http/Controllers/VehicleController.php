@@ -18,11 +18,18 @@ class VehicleController extends Controller
         return view('payment.vehicleList', compact('vehicles')); // Render the vehicles view
     }
 
-    public function showAllVehicles()
-    {
-        $vehicles = Vehicle::all(); // Fetch all vehicles
-        return view('vendor-role.vehicles', compact('vehicles')); // Render the vehicles view
-    }
+    public function showAllVehicles(Request $request)
+{
+    // Get the vendor ID from the session
+    $vendorId = $request->session()->get('user_id'); 
+
+    // Fetch vehicles for the specific vendor
+    $vehicles = Vehicle::where('vendor_id', $vendorId)->get();
+
+    // Render the vehicles view with the filtered data
+    return view('vendor-role.vehicles', compact('vehicles'));
+}
+
 
     public function store(Request $request)
     {
@@ -41,7 +48,7 @@ class VehicleController extends Controller
 
         // Create a new vehicle
         Vehicle::create([
-            'vendor_id' => 1, // Static or placeholder value for vendor_id
+            'vendor_id' => session('user_id'), // Static or placeholder value for vendor_id
             'type' => ucfirst($request->type),
             'model' => $request->model,
             'price_per_day' => $request->price_per_day,
