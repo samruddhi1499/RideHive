@@ -4,7 +4,7 @@
 <h2 class="text-2xl font-semibold mb-6">Manage Vendors</h2>
 
 <!-- Add Vendor Form -->
-<div class="bg-white p-6 rounded-lg shadow mb-8">
+<!-- <div class="bg-white p-6 rounded-lg shadow mb-8">
     <h3 class="text-lg font-semibold mb-4 text-[#e75480]">Add New Vendor</h3>
     <form action="{{ route('admin.vendors.store') }}" method="POST" class="space-y-6">
         @csrf
@@ -24,7 +24,7 @@
         </div>
         <button type="submit" class="bg-[#e75480] text-white px-6 py-2 rounded hover:bg-gray-700 mt-4">Add Vendor</button>
     </form>
-</div>
+</div> -->
 
 <!-- Vendors Table -->
 <div class="bg-white p-6 rounded-lg shadow">

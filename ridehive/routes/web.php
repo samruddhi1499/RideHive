@@ -34,6 +34,8 @@ Route::post('register', [AuthController::class, 'register']);
 // Step 1 - Vehicle List
 Route::get('vehicles', [RidePaymentController::class, 'showAllVehicles'])->name('vehicles');
 
+Route::get('/vendor/vehicles', [VendorController::class, 'vehicles'])->name('vendor.vehicles');
+Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
 
 
 

@@ -25,11 +25,16 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
     
-            // Store the user ID in the session
-            $userId = Auth::id(); // Get the authenticated user's ID
-            $request->session()->put('user_id', $userId);
+            $user = Auth::user(); // Get the authenticated user
     
-            return redirect()->intended('dashboard');
+            // Redirect based on role
+            if ($user->role === 'Admin') {
+                return redirect('/admin/users'); // Admin landing page
+            } elseif ($user->role === 'Vendor') {
+                return redirect('/vendor/vehicles'); // Vendor landing page
+            } else {
+                return redirect('/dashboard'); // User landing page
+            }
         }
     
         return back()->withErrors([
@@ -38,13 +43,14 @@ class AuthController extends Controller
     }
     
 
+    
+
     // Show Registration Form
     public function showRegistrationForm()
     {
         return view('auth.register');
     }
 
-    // Handle Registration
     public function register(Request $request)
     {
         // Validate Input
@@ -53,21 +59,26 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users,email',
             'contact' => 'nullable|string|max:255',
             'password' => 'required|min:6|confirmed',
+            'role' => 'required|in:User,Vendor', // Validate role selection
         ]);
-
+    
         // Create User
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'contact' => $request->contact, // Save contact number (nullable)
+            'contact' => $request->contact,
             'password' => Hash::make($request->password),
-            'role' => 'User', // Default role
-            'status' => 'Pending', // Default status
+            'role' => $request->role, // Save selected role
+            'status' => 'Pending',
         ]);
+    
+        // Automatically log in the user after registration
+        Auth::login($user);
 
-
-        // Redirect to Login Page with Success Message
-        return redirect()->route('login')->with('success', 'Registration successful! Please login.');
+         // Redirect to Login Page with Success Message
+         return redirect()->route('login')->with('success', 'Registration successful! Please login.');
+    
     }
+    
 
 }

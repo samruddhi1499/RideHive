@@ -339,8 +339,8 @@ class ComposerStaticInit719697e779270517ef8efb9c91947ee9
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -526,6 +526,7 @@ class ComposerStaticInit719697e779270517ef8efb9c91947ee9
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
         'App\\Http\\Controllers\\RidePaymentController' => __DIR__ . '/../..' . '/app/Http/Controllers/RidePaymentController.php',
+        'App\\Http\\Controllers\\VehicleController' => __DIR__ . '/../..' . '/app/Http/Controllers/VehicleController.php',
         'App\\Kernel' => __DIR__ . '/..' . '/laravel/pint/app/Kernel.php',
         'App\\Models\\Availability' => __DIR__ . '/../..' . '/app/Models/Availability.php',
         'App\\Models\\Booking' => __DIR__ . '/../..' . '/app/Models/Booking.php',

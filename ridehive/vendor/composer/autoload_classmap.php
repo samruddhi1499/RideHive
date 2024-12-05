@@ -18,6 +18,7 @@ return array(
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\DashboardController' => $baseDir . '/app/Http/Controllers/DashboardController.php',
     'App\\Http\\Controllers\\RidePaymentController' => $baseDir . '/app/Http/Controllers/RidePaymentController.php',
+    'App\\Http\\Controllers\\VehicleController' => $baseDir . '/app/Http/Controllers/VehicleController.php',
     'App\\Kernel' => $vendorDir . '/laravel/pint/app/Kernel.php',
     'App\\Models\\Availability' => $baseDir . '/app/Models/Availability.php',
     'App\\Models\\Booking' => $baseDir . '/app/Models/Booking.php',
